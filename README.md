@@ -1,0 +1,1 @@
+# lab-arquitetura-hexagonal-2024
