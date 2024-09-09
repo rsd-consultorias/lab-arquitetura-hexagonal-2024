@@ -39,10 +39,10 @@ src
     │           ├── logging
     │           │    ├── config
     │           │    └── service
-    │           ├── integration
-    │           │    ├── client
-    │           │    └── dto
-    │           │
+    │           └── integration
+    │                ├── client
+    │                └── dto
+    │            
     └── resources
         └── application.properties
 
