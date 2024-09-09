@@ -57,7 +57,7 @@ src
     - repository: Interfaces dos repositórios de domínio.
     - service: Serviços de domínio.
   - infrastructure: Implementações de infraestrutura e configurações.
-  -   adapter: Implementações dos adaptadores de entrada (in) e saída (out).
+    - adapter: Implementações dos adaptadores de entrada (in) e saída (out).
     - configuration: Configurações da aplicação.
     - repository: Implementações dos repositórios.
   - web: Contém os controladores e DTOs para a camada web.
