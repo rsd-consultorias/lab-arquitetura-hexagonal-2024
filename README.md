@@ -1,4 +1,4 @@
-# lab-arquitetura-hexagonal-2024
+# Arquitetura Hexagonal - 2024
 
 ## Estrutura do projeto
 
