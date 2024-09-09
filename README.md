@@ -80,5 +80,5 @@ src
     - client: Clientes para se comunicar com APIs externas.
     - dto: Objetos de transferência de dados usados para integração com sistemas externos.
   - test: Contém classes de teste para garantir a qualidade do código.
- - unit: Testes unitários que verificam a funcionalidade de componentes individuais.
+    - unit: Testes unitários que verificam a funcionalidade de componentes individuais.
     - integration: Testes de integração que verificam a interação entre diferentes componentes do sistema.
