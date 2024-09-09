@@ -39,10 +39,17 @@ src
     │           ├── logging
     │           │    ├── config
     │           │    └── service
-    │           └── integration
-    │                ├── client
-    │                └── dto
-    │            
+    │           ├── integration
+    │           │    ├── client
+    │           │    └── dto
+    │           ├── command
+    │           │   ├── handler
+    │           │   ├── model
+    │           │   └── service
+    │           └── query
+    │               ├── handler
+    │               ├── model
+    │               └── service
     └── resources
         └── application.properties
 
@@ -79,6 +86,14 @@ src
   - integration: Gerencia a integração com sistemas externos.
     - client: Clientes para se comunicar com APIs externas.
     - dto: Objetos de transferência de dados usados para integração com sistemas externos.
+  - command: Responsável por gerenciar as operações de escrita (comandos) que alteram o estado do sistema.
+    - handler: Classes que lidam com a execução de comandos.
+    - model: Modelos específicos para comandos.
+    - service: Serviços relacionados ao processamento de comandos.
+  - query: Responsável por gerenciar as operações de leitura (consultas) que recuperam dados do sistema.
+    - handler: Classes que lidam com a execução de consultas.
+    - model: Modelos específicos para consultas.
+    - service: Serviços relacionados ao processamento de consultas.
   - test: Contém classes de teste para garantir a qualidade do código.
     - unit: Testes unitários que verificam a funcionalidade de componentes individuais.
     - integration: Testes de integração que verificam a interação entre diferentes componentes do sistema.
