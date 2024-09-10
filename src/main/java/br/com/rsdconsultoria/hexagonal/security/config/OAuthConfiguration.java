@@ -1,4 +1,4 @@
-package br.com.rsdconsultoria.hexagonal.infrastructure.configuration;
+package br.com.rsdconsultoria.hexagonal.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +14,11 @@ public class OAuthConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().anyRequest().permitAll();
-        // http.authorizeHttpRequests(authorize -> authorize
-        //         .requestMatchers("/docs/**").permitAll()
-        //         .requestMatchers("/actuator/**").permitAll()
-        //         .anyRequest().authenticated())
-            // .csrf().disable(); // Desabilita CSRF para simplificação, ajuste conforme necessário
+        http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/docs/**").permitAll()
+                .requestMatchers("/greetings/**").permitAll()
+                .requestMatchers("/actuator/**").permitAll()
+                .anyRequest().authenticated());
     
         return http.build();
     }
