@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public class AccountingApplicationServiceTest {
 
     @Test
     public void testProcessInvoicePayment_Success() throws Exception {
-        Long invoiceId = 1L;
+        UUID invoiceId = UUID.randomUUID();
         BigDecimal paymentAmount = new BigDecimal("1000.00");
 
         Invoice invoice = mock(Invoice.class);
@@ -49,7 +50,7 @@ public class AccountingApplicationServiceTest {
 
     @Test
     public void testProcessInvoicePayment_Failure() {
-        Long invoiceId = 1L;
+        UUID invoiceId = UUID.randomUUID();
         BigDecimal paymentAmount = new BigDecimal("0");
 
         Invoice invoice = mock(Invoice.class);

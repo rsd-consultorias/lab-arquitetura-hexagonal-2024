@@ -1,5 +1,7 @@
 package br.com.rsdconsultoria.hexagonal.infrastructure.repository;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +16,9 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
     private InvoiceRepositoryJPA invoiceRepositoryJPA;
 
     @Override
-    public Invoice findById(Long invoiceId) {
+    public Invoice findById(UUID invoiceId) {
                 
-        return new Invoice();
+        return null;
     }
 
     @Override

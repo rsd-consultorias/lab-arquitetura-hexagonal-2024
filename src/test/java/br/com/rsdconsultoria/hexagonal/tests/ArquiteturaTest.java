@@ -4,24 +4,41 @@ import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.lang.ArchRule;
-import org.junit.jupiter.api.Test;
+import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+import org.junit.jupiter.api.Test;
 
 public class ArquiteturaTest {
 
-    @Test
-    void garantirArquitetura() {
-        JavaClasses importedClasses = new ClassFileImporter()
-                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
-                .importPackages("br.com.rsdconsultoria.hexagonal", "java.lang..", "java.util..", "java.math..");
+        @Test
+        public void domainServicesShouldOnlyBeAccessedByApplicationServices() {
+                JavaClasses importedClasses = new ClassFileImporter()
+                                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                                .importPackages("br.com.rsdconsultoria.hexagonal");
 
-        // Domain Services só podem ser acessadas pela Application Service
-        ArchRule domainServices = classes()
-                .that().resideInAPackage("br.com.rsdconsultoria.hexagonal.domain.service..")
-                .should().onlyBeAccessed().byAnyPackage("br.com.rsdconsultoria.hexagonal.application..");
+                ArchRule domainServices = ArchRuleDefinition.classes()
+                                .that().resideInAPackage("br.com.rsdconsultoria.hexagonal.domain.service..")
+                                .should().onlyBeAccessed()
+                                .byAnyPackage("br.com.rsdconsultoria.hexagonal.application..");
 
-        domainServices.check(importedClasses);
+                domainServices.check(importedClasses);
+        }
 
-    }
+        @Test
+        public void controllersShouldNotAccessCertainPackages() {
+                JavaClasses importedClasses = new ClassFileImporter()
+                                .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                                .importPackages("br.com.rsdconsultoria.hexagonal");
+
+                ArchRule controllers = ArchRuleDefinition.classes()
+                                .that().resideInAPackage("br.com.rsdconsultoria.hexagonal.web.controller..")
+                                .should().accessClassesThat()
+                                .resideOutsideOfPackages(
+                                                "br.com.rsdconsultoria.hexagonal.domain.service..",
+                                                "br.com.rsdconsultoria.hexagonal.domain.repository..",
+                                                "br.com.rsdconsultoria.hexagonal.application.port..",
+                                                "br.com.rsdconsultoria.hexagonal.infrastructure.adapter..");
+
+                controllers.check(importedClasses);
+        }
 }

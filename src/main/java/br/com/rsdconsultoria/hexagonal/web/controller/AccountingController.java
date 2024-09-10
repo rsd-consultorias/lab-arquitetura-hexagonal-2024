@@ -1,6 +1,7 @@
 package br.com.rsdconsultoria.hexagonal.web.controller;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rsdconsultoria.hexagonal.application.AccountingApplicationService;
-import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
+import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
 
 @RestController
 public class AccountingController extends BaseController {
     private AccountingApplicationService accountingApplicationService;
 
-    public AccountingController(final InvoiceRepository invoiceRepository) {
+    public AccountingController(final InvoiceRepositoryImpl invoiceRepository) {
         this.accountingApplicationService = new AccountingApplicationService(invoiceRepository);
     }
 
@@ -35,7 +36,7 @@ public class AccountingController extends BaseController {
         logger.debug("Teste de log a={}, b={}", a, b);
 
         try {
-            this.accountingApplicationService.processInvoicePayment(0l, BigDecimal.ZERO);
+            this.accountingApplicationService.processInvoicePayment(UUID.randomUUID(), BigDecimal.ZERO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(getMessage(e.getMessage(), countryCode));
         }

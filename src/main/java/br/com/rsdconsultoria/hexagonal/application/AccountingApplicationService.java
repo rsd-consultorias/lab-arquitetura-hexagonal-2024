@@ -1,6 +1,7 @@
 package br.com.rsdconsultoria.hexagonal.application;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import br.com.rsdconsultoria.hexagonal.domain.model.Invoice;
 import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
@@ -15,7 +16,7 @@ public class AccountingApplicationService {
         this.invoiceService = new InvoiceService();
     }
 
-    public void processInvoicePayment(Long invoiceId, BigDecimal paymentAmount) throws Exception {
+    public void processInvoicePayment(UUID invoiceId, BigDecimal paymentAmount) throws Exception {
         Invoice invoice = invoiceRepository.findById(invoiceId);
         BigDecimal totalAmount = invoiceService.calculateTotalAmount(invoice);
 
