@@ -14,6 +14,8 @@ public class BaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public String getMessage(String message, String countryCode) {
+        // TODO: corrigir a forma como o Locale é criado para que crie com código do
+        // país e idioma
         return messageSource.getMessage(message, null,
                 new Locale((countryCode != null ? countryCode : "").toUpperCase(),
                         (countryCode != null ? countryCode : "").toLowerCase()));

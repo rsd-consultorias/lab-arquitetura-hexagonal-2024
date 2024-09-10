@@ -2,7 +2,6 @@ package br.com.rsdconsultoria.hexagonal.web.controller;
 
 import java.math.BigDecimal;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,26 +15,17 @@ import br.com.rsdconsultoria.hexagonal.application.AccountingApplicationService;
 import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
 import br.com.rsdconsultoria.hexagonal.domain.service.InvoiceService;
 
-/**
- *
- * A sample greetings controller to return greeting text
- */
 @RestController
-public class GreetingsController extends BaseController {
+public class AccountingController extends BaseController {
     private AccountingApplicationService accountingApplicationService;
 
-    public GreetingsController(final InvoiceRepository invoiceRepository) {
+    public AccountingController(final InvoiceRepository invoiceRepository) {
         this.accountingApplicationService = new AccountingApplicationService(invoiceRepository, new InvoiceService());
     }
 
-    /**
-     *
-     * @param name the name to greet
-     * @return greeting text
-     */
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> greetingText(@PathVariable String name,
+    public ResponseEntity<String> dummyTest(@PathVariable String name,
             @RequestHeader("x-country-code") String countryCode) {
         name = getMessage("NOT_FOUND", countryCode);
         int a = 1;

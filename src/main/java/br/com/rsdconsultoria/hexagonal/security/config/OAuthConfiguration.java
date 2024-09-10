@@ -16,7 +16,7 @@ public class OAuthConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/docs/**").permitAll()
-                .requestMatchers("/greetings/**").permitAll()
+                .requestMatchers("/accounting/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated());
     
