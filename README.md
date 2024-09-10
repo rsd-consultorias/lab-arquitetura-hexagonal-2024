@@ -109,3 +109,4 @@ src
 
 ## Convenções adotadas
 
+[O código deve seguir essas convenções para estilo](/doc/checkstyle.md)
