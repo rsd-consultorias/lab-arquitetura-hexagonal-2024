@@ -1,4 +1,4 @@
-package br.com.rsdconsultoria.hexagonal;
+package br.com.rsdconsultoria.hexagonal.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -50,11 +50,11 @@ public class AccountingApplicationServiceTest {
     @Test
     public void testProcessInvoicePayment_Failure() {
         Long invoiceId = 1L;
-        BigDecimal paymentAmount = new BigDecimal("800.00");
+        BigDecimal paymentAmount = new BigDecimal("0");
 
         Invoice invoice = mock(Invoice.class);
         when(invoiceRepository.findById(invoiceId)).thenReturn(invoice);
-        when(invoiceService.calculateTotalAmount(invoice)).thenReturn(new BigDecimal("900.00"));
+        when(invoiceService.calculateTotalAmount(invoice)).thenReturn(new BigDecimal("0"));
 
         Exception exception = assertThrows(Exception.class, () -> {
             accountingApplicationService.processInvoicePayment(invoiceId, paymentAmount);

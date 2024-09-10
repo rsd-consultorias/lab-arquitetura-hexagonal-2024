@@ -1,4 +1,4 @@
-package br.com.rsdconsultoria.hexagonal;
+package br.com.rsdconsultoria.hexagonal.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 

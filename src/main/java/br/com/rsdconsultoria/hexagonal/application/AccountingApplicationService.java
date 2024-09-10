@@ -10,9 +10,9 @@ public class AccountingApplicationService {
     private final InvoiceRepository invoiceRepository;
     private final InvoiceService invoiceService;
 
-    public AccountingApplicationService(InvoiceRepository invoiceRepository, InvoiceService invoiceService) {
+    public AccountingApplicationService(InvoiceRepository invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
-        this.invoiceService = invoiceService;
+        this.invoiceService = new InvoiceService();
     }
 
     public void processInvoicePayment(Long invoiceId, BigDecimal paymentAmount) throws Exception {

@@ -1,6 +1,8 @@
-package br.com.rsdconsultoria.hexagonal;
+package br.com.rsdconsultoria.hexagonal.tests;
 
 import org.springframework.boot.SpringApplication;
+
+import br.com.rsdconsultoria.hexagonal.HexagonalApplication;
 
 public class TestHexagonalApplication {
 

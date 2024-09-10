@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rsdconsultoria.hexagonal.application.AccountingApplicationService;
 import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
-import br.com.rsdconsultoria.hexagonal.domain.service.InvoiceService;
 
 @RestController
 public class AccountingController extends BaseController {
     private AccountingApplicationService accountingApplicationService;
 
     public AccountingController(final InvoiceRepository invoiceRepository) {
-        this.accountingApplicationService = new AccountingApplicationService(invoiceRepository, new InvoiceService());
+        this.accountingApplicationService = new AccountingApplicationService(invoiceRepository);
     }
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)

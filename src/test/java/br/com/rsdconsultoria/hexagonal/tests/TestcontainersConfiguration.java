@@ -1,4 +1,4 @@
-package br.com.rsdconsultoria.hexagonal;
+package br.com.rsdconsultoria.hexagonal.tests;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

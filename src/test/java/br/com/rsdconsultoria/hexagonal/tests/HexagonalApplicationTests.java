@@ -1,4 +1,4 @@
-package br.com.rsdconsultoria.hexagonal;
+package br.com.rsdconsultoria.hexagonal.tests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
