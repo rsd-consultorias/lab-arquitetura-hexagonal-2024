@@ -51,7 +51,16 @@ src
     │               ├── model
     │               └── service
     └── resources
-        └── application.properties
+        ├── application.yml
+        ├── application-dev.yml
+        ├── application-test.yml
+        ├── application-uat.yml
+        ├── application-stag.yml
+        ├── application-prod.yml
+        │
+        ├── messages_bra.properties
+        ├── messages_arg.properties
+        └── messages.properties
 
 ```
 
