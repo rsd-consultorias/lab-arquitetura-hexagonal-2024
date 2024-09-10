@@ -2,6 +2,9 @@ package br.com.rsdconsultoria.hexagonal.domain.model;
 
 import java.util.Collection;
 
+/**
+ * Model
+ */
 public class Invoice {
     private Collection<Item> items;
 
