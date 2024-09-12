@@ -6,7 +6,7 @@
 
 Sugestão para estrutura de pastas:
 
-```bash
+<!-- ```bash
 src
 └── main
     ├── java
@@ -66,7 +66,7 @@ src
         ├── messages_arg.properties
         └── messages.properties
 
-```
+``` -->
 
 ### Descrição dos Pacotes
   - application: Contém a lógica de aplicação e os casos de uso.
