@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rsdconsultoria.hexagonal.application.AccountingApplicationService;
+import br.com.rsdconsultoria.hexagonal.application.service.AccountingApplicationService;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
 
 @RestController

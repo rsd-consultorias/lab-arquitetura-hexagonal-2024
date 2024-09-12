@@ -2,6 +2,10 @@
 
 ## Estrutura do projeto
 
+[Pacotes](./doc/diagramas-pacotes.jpg)
+
+Sugestão para estrutura de pastas:
+
 ```bash
 src
 └── main

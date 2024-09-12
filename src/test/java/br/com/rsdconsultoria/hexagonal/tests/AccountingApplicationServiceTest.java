@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.rsdconsultoria.hexagonal.application.AccountingApplicationService;
+import br.com.rsdconsultoria.hexagonal.application.service.AccountingApplicationService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Invoice;
 import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
 import br.com.rsdconsultoria.hexagonal.domain.service.InvoiceService;
