@@ -4,7 +4,7 @@
 
 ![Pacotes](./doc/diagramas-pacotes.jpg)
 
-Sugestão para estrutura de pastas:
+<!-- Sugestão para estrutura de pastas: -->
 
 <!-- ```bash
 src
