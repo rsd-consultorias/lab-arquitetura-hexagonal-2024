@@ -1,6 +1,0 @@
-/Users/rafaeldias/repositories/lab-arquitetura-hexagonal-2024/hexagonal-core/src/main/java/br/com/rsdconsultoria/hexagonal/domain/model/Item.java
-/Users/rafaeldias/repositories/lab-arquitetura-hexagonal-2024/hexagonal-core/src/main/java/br/com/rsdconsultoria/hexagonal/domain/service/InvoiceService.java
-/Users/rafaeldias/repositories/lab-arquitetura-hexagonal-2024/hexagonal-core/src/main/java/br/com/rsdconsultoria/hexagonal/domain/repository/InvoiceRepository.java
-/Users/rafaeldias/repositories/lab-arquitetura-hexagonal-2024/hexagonal-core/src/main/java/br/com/rsdconsultoria/hexagonal/application/service/AccountingApplicationService.java
-/Users/rafaeldias/repositories/lab-arquitetura-hexagonal-2024/hexagonal-core/src/main/java/br/com/rsdconsultoria/hexagonal/domain/constants/ExceptionMessages.java
-/Users/rafaeldias/repositories/lab-arquitetura-hexagonal-2024/hexagonal-core/src/main/java/br/com/rsdconsultoria/hexagonal/domain/model/Invoice.java
