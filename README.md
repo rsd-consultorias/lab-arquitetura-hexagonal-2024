@@ -111,6 +111,12 @@ src
     - unit: Testes unitários que verificam a funcionalidade de componentes individuais.
     - integration: Testes de integração que verificam a interação entre diferentes componentes do sistema.
 
+## Escolha do servidor web
+
+Nesse projeto a decisão foi pelo Undertow por ser mais aderente à alta disponibilidade
+
+[Comparação entre servidores](/doc/server.md)
+
 ## Convenções adotadas
 
 [O código deve seguir essas convenções para estilo](/doc/checkstyle.md)

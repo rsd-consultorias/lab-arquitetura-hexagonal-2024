@@ -1,25 +1,27 @@
 package br.com.rsdconsultoria.hexagonal.domain.model;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public class Item {
+    private String name;
+    private int quantity;
     private BigDecimal price;
-    private BigInteger quantity;
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
+    public Item(String name, int quantity, BigDecimal price) {
+        this.name = name;
+        this.quantity = quantity;
         this.price = price;
     }
 
-    public BigInteger getQuantity() {
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigInteger quantity) {
-        this.quantity = quantity;
+    public BigDecimal getPrice() {
+        return price;
     }
 }

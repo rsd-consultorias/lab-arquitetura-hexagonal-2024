@@ -3,6 +3,16 @@ spring:
     active: ${ENVIRONMENT:dev}
   application:
     name: hexagonal
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+server: 
+  tomcat: 
+    uri-encoding: UTF-8
+
+
 logging:
   level:
     ROOT: INFO
