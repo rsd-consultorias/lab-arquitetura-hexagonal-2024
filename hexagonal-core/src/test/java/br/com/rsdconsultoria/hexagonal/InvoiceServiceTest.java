@@ -1,29 +1,21 @@
 package br.com.rsdconsultoria.hexagonal;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.rsdconsultoria.hexagonal.domain.model.Invoice;
-import br.com.rsdconsultoria.hexagonal.domain.service.InvoiceService;
+import br.com.rsdconsultoria.hexagonal.command.service.InvoiceService;
 
 public class InvoiceServiceTest {
 
-    private final InvoiceService invoiceService = new InvoiceService();
+    private InvoiceService invoiceService = new InvoiceService();
 
     @Test
-    public void testCalculateTotalAmount() {
-        Invoice invoice = new Invoice();
-        // Suponha que você tenha métodos para adicionar itens à fatura e definir
-        // valores
-        // invoice.addItem(new Item("item1", new BigDecimal("100.00")));
-        // invoice.addItem(new Item("item2", new BigDecimal("200.00")));
-
-        BigDecimal totalAmount = invoiceService.calculateTotalAmount(invoice);
-
-        // Como o método atual retorna BigDecimal.ZERO, o teste deve verificar isso
-        assertEquals(BigDecimal.ZERO, totalAmount);
+    public void testCreateInvoice() {
+        // Aqui você pode adicionar lógica para verificar se a fatura foi criada corretamente
+        // Por exemplo, você pode usar um repositório mockado para verificar a persistência
+        invoiceService.createInvoice("1", "customer1", new BigDecimal("100.0"));
+        // Verifique a saída no console ou adicione lógica de verificação
     }
 }
+

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rsdconsultoria.hexagonal.application.service.AccountingApplicationService;
+import br.com.rsdconsultoria.hexagonal.command.CreateInvoiceCommand;
+import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
 import br.com.rsdconsultoria.hexagonal.util.factory.InvoiceFactory;
 import br.com.rsdconsultoria.hexagonal.web.dto.InvoiceResponse;
@@ -23,16 +27,25 @@ import br.com.rsdconsultoria.hexagonal.web.dto.InvoiceResponse;
 public class AccountingController extends BaseController {
     private AccountingApplicationService accountingApplicationService;
     private InvoiceRepositoryImpl invoiceRepository;
+    private final CreateInvoiceCommandHandler createInvoiceCommandHandler;
 
-    public AccountingController(final InvoiceRepositoryImpl invoiceRepository) {
+    public AccountingController(final InvoiceRepositoryImpl invoiceRepository,
+            CreateInvoiceCommandHandler createInvoiceCommandHandler) {
         this.accountingApplicationService = new AccountingApplicationService(invoiceRepository);
         this.invoiceRepository = invoiceRepository;
+        this.createInvoiceCommandHandler = createInvoiceCommandHandler;
+    }
+
+    @PostMapping("/createInvoice")
+    public ResponseEntity<Void> createInvoice(@RequestBody CreateInvoiceCommand command) {
+        createInvoiceCommandHandler.handle(command);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/invoice/{id}")
     public ResponseEntity<InvoiceResponse> getInvoiceById(@PathVariable("id") String id) {
         var invoice = invoiceRepository.findById(UUID.randomUUID());
-        
+
         return ResponseEntity.ok(InvoiceFactory.builInvoiceResponseFromModel(invoice));
     }
 

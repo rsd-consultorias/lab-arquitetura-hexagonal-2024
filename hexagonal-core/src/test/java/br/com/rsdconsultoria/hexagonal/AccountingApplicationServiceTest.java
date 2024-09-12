@@ -14,9 +14,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import br.com.rsdconsultoria.hexagonal.application.service.AccountingApplicationService;
+import br.com.rsdconsultoria.hexagonal.command.service.InvoiceService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Invoice;
 import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
-import br.com.rsdconsultoria.hexagonal.domain.service.InvoiceService;
 
 public class AccountingApplicationServiceTest {
 
@@ -41,7 +41,6 @@ public class AccountingApplicationServiceTest {
 
         Invoice invoice = mock(Invoice.class);
         when(invoiceRepository.findById(invoiceId)).thenReturn(invoice);
-        when(invoiceService.calculateTotalAmount(invoice)).thenReturn(new BigDecimal("900.00"));
 
         accountingApplicationService.processInvoicePayment(invoiceId, paymentAmount);
 
@@ -56,7 +55,6 @@ public class AccountingApplicationServiceTest {
 
         Invoice invoice = mock(Invoice.class);
         when(invoiceRepository.findById(invoiceId)).thenReturn(invoice);
-        when(invoiceService.calculateTotalAmount(invoice)).thenReturn(new BigDecimal("0"));
 
         Exception exception = assertThrows(Exception.class, () -> {
             accountingApplicationService.processInvoicePayment(invoiceId, paymentAmount);

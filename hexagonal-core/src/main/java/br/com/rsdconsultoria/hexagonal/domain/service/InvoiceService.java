@@ -9,4 +9,8 @@ public class InvoiceService {
         
         return BigDecimal.ZERO;
     }
+
+    public void createInvoice(String string, String string2, double d) {
+        
+    }
 }
