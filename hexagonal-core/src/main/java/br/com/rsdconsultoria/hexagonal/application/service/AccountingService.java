@@ -8,11 +8,11 @@ import br.com.rsdconsultoria.hexagonal.domain.model.Invoice;
 import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
 import br.com.rsdconsultoria.hexagonal.domain.service.InvoiceService;
 
-public class AccountingApplicationService {
+public class AccountingService {
     private final InvoiceRepository invoiceRepository;
     private final InvoiceService invoiceService;
 
-    public AccountingApplicationService(InvoiceRepository invoiceRepository) {
+    public AccountingService(InvoiceRepository invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceService = new InvoiceService();
     }

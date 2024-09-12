@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.rsdconsultoria.hexagonal.application.service.AccountingApplicationService;
+import br.com.rsdconsultoria.hexagonal.application.service.AccountingService;
 import br.com.rsdconsultoria.hexagonal.command.service.InvoiceService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Invoice;
 import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
@@ -27,7 +27,7 @@ public class AccountingApplicationServiceTest {
     private InvoiceService invoiceService;
 
     @InjectMocks
-    private AccountingApplicationService accountingApplicationService;
+    private AccountingService accountingApplicationService;
 
     @BeforeEach
     public void setUp() {

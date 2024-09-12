@@ -15,29 +15,48 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rsdconsultoria.hexagonal.application.service.AccountingApplicationService;
+import br.com.rsdconsultoria.hexagonal.application.service.AccountingService;
+import br.com.rsdconsultoria.hexagonal.application.service.InventoryService;
+import br.com.rsdconsultoria.hexagonal.application.service.OrderService;
+import br.com.rsdconsultoria.hexagonal.application.service.PaymentService;
 import br.com.rsdconsultoria.hexagonal.command.CreateInvoiceCommand;
 import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
+import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
+import br.com.rsdconsultoria.hexagonal.integration.SagaOrchestrator;
 import br.com.rsdconsultoria.hexagonal.util.factory.InvoiceFactory;
 import br.com.rsdconsultoria.hexagonal.web.dto.InvoiceResponse;
 
 @RestController
 @RequestMapping("/accounting")
 public class AccountingController extends BaseController {
-    private AccountingApplicationService accountingApplicationService;
+    private AccountingService accountingApplicationService;
     private InvoiceRepositoryImpl invoiceRepository;
     private final CreateInvoiceCommandHandler createInvoiceCommandHandler;
+    private SagaOrchestrator sagaOrchestrator;
 
     public AccountingController(final InvoiceRepositoryImpl invoiceRepository,
             CreateInvoiceCommandHandler createInvoiceCommandHandler) {
-        this.accountingApplicationService = new AccountingApplicationService(invoiceRepository);
+        this.accountingApplicationService = new AccountingService(invoiceRepository);
         this.invoiceRepository = invoiceRepository;
         this.createInvoiceCommandHandler = createInvoiceCommandHandler;
+
+        // TODO: refatorar essa parte ;)
+        this.sagaOrchestrator = new SagaOrchestrator(
+                new OrderService(),
+                new PaymentService(),
+                new InventoryService());
     }
 
     @PostMapping("/createInvoice")
     public ResponseEntity<Void> createInvoice(@RequestBody CreateInvoiceCommand command) {
+        var order = new Order();
+        order.setId("1");
+        order.setProduct("Test");
+        order.setQuantity(1);
+
+        this.sagaOrchestrator.executeSaga(order);
+        
         createInvoiceCommandHandler.handle(command);
         return ResponseEntity.ok().build();
     }
