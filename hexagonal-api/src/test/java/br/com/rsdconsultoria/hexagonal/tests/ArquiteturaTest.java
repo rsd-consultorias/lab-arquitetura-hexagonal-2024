@@ -32,7 +32,7 @@ public class ArquiteturaTest {
 
                 ArchRule controllers = ArchRuleDefinition.classes()
                                 .that().resideInAPackage("br.com.rsdconsultoria.hexagonal.web.controller..")
-                                .should().accessClassesThat()
+                                .should().onlyAccessClassesThat()
                                 .resideOutsideOfPackages(
                                                 "br.com.rsdconsultoria.hexagonal.domain.service..",
                                                 "br.com.rsdconsultoria.hexagonal.domain.repository..",
