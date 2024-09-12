@@ -35,11 +35,10 @@ public class AccountingController extends BaseController {
     private final CreateInvoiceCommandHandler createInvoiceCommandHandler;
     private SagaOrchestrator sagaOrchestrator;
 
-    public AccountingController(final InvoiceRepositoryImpl invoiceRepository,
-            CreateInvoiceCommandHandler createInvoiceCommandHandler) {
+    public AccountingController(final InvoiceRepositoryImpl invoiceRepository) {
         this.accountingApplicationService = new AccountingService(invoiceRepository);
         this.invoiceRepository = invoiceRepository;
-        this.createInvoiceCommandHandler = createInvoiceCommandHandler;
+        this.createInvoiceCommandHandler = new CreateInvoiceCommandHandler();
 
         // TODO: refatorar essa parte ;)
         this.sagaOrchestrator = new SagaOrchestrator(
@@ -56,7 +55,7 @@ public class AccountingController extends BaseController {
         order.setQuantity(1);
 
         this.sagaOrchestrator.executeSaga(order);
-        
+
         createInvoiceCommandHandler.handle(command);
         return ResponseEntity.ok().build();
     }

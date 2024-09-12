@@ -7,12 +7,11 @@ import br.com.rsdconsultoria.hexagonal.command.service.InvoiceService;
 public class CreateInvoiceCommandHandler {
     private final InvoiceService invoiceService;
 
-    public CreateInvoiceCommandHandler(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
+    public CreateInvoiceCommandHandler() {
+        this.invoiceService = new InvoiceService();
     }
 
     public void handle(CreateInvoiceCommand command) {
         invoiceService.createInvoice(command.getInvoiceId(), command.getCustomerId(), command.getAmount());
     }
 }
-
