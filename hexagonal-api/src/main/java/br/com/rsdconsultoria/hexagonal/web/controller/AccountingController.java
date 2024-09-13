@@ -24,26 +24,30 @@ import br.com.rsdconsultoria.hexagonal.command.CreateInvoiceCommand;
 import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
+import br.com.rsdconsultoria.hexagonal.infrastructure.repository.OrderRepositoryImpl;
 import br.com.rsdconsultoria.hexagonal.util.factory.InvoiceFactory;
 import br.com.rsdconsultoria.hexagonal.web.dto.InvoiceResponse;
 
 @RestController
 @RequestMapping("/accounting")
 public class AccountingController extends BaseController {
-    private AccountingService accountingApplicationService;
-    private InvoiceRepositoryImpl invoiceRepository;
+    private final AccountingService accountingApplicationService;
+    private final InvoiceRepositoryImpl invoiceRepository;
     private final CreateInvoiceCommandHandler createInvoiceCommandHandler;
-    private SagaOrchestrationService sagaOrchestrator;
+    private final SagaOrchestrationService sagaOrchestrator;
+    private final OrderRepositoryImpl orderRepository;
 
-    public AccountingController(final InvoiceRepositoryImpl invoiceRepository) {
+    public AccountingController(final InvoiceRepositoryImpl invoiceRepository,
+            final OrderRepositoryImpl orderRepository) {
         this.accountingApplicationService = new AccountingService(invoiceRepository);
         this.invoiceRepository = invoiceRepository;
+        this.orderRepository = orderRepository;
         this.createInvoiceCommandHandler = new CreateInvoiceCommandHandler();
 
         // TODO: refatorar essa parte ;)
         this.sagaOrchestrator = new SagaOrchestrationService(
                 new OrderService(),
-                new PaymentService(),
+                new PaymentService(orderRepository),
                 new InventoryService());
     }
 

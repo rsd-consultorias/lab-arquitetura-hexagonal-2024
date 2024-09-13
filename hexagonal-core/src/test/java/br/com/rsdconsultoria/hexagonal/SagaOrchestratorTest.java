@@ -15,6 +15,7 @@ import br.com.rsdconsultoria.hexagonal.application.service.OrderService;
 import br.com.rsdconsultoria.hexagonal.application.service.PaymentService;
 import br.com.rsdconsultoria.hexagonal.application.service.SagaOrchestrationService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
+import br.com.rsdconsultoria.hexagonal.domain.repository.InvoiceRepository;
 
 public class SagaOrchestratorTest {
 
@@ -29,6 +30,9 @@ public class SagaOrchestratorTest {
 
     @InjectMocks
     private SagaOrchestrationService sagaOrchestrator;
+
+    @Mock
+    private InvoiceRepository invoiceRepository;
 
     @BeforeEach
     public void setUp() {
@@ -60,10 +64,10 @@ public class SagaOrchestratorTest {
 
         sagaOrchestrator.executeSaga(order);
 
-        verify(orderService).createOrder(order);
-        verify(paymentService).processPayment(order);
+        verify(orderService, times(1)).createOrder(order);
+        verify(paymentService, times(1)).processPayment(order);
         verify(inventoryService, never()).updateInventory(order);
-        verify(orderService).cancelOrder(order);
-        verify(paymentService).refundPayment(order);
+        verify(orderService, times(1)).cancelOrder(order);
+        verify(paymentService, times(1)).refundPayment(order);
     }
 }

@@ -3,9 +3,9 @@ package br.com.rsdconsultoria.hexagonal.application.service;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 
 public class SagaOrchestrationService {
-    private OrderService orderService;
-    private PaymentService paymentService;
-    private InventoryService inventoryService;
+    private final OrderService orderService;
+    private final PaymentService paymentService;
+    private final InventoryService inventoryService;;
 
     public SagaOrchestrationService(final OrderService orderService,
             final PaymentService paymentService,

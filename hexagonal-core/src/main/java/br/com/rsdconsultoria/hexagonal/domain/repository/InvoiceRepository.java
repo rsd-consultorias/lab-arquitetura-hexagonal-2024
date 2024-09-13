@@ -7,7 +7,5 @@ import br.com.rsdconsultoria.hexagonal.domain.model.Invoice;
 public interface InvoiceRepository {
 
     Invoice findById(UUID invoiceId);
-
     void save(Invoice invoice);
-
 }

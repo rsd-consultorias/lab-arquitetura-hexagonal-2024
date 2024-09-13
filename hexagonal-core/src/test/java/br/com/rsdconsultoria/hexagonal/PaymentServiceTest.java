@@ -1,13 +1,27 @@
 package br.com.rsdconsultoria.hexagonal;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import br.com.rsdconsultoria.hexagonal.application.service.PaymentService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
+import br.com.rsdconsultoria.hexagonal.domain.repository.OrderRepository;
 
 public class PaymentServiceTest {
 
-    private PaymentService paymentService = new PaymentService();
+    @Mock
+    private OrderRepository orderRepository;
+
+    @InjectMocks
+    private PaymentService paymentService;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void testProcessPayment() {
