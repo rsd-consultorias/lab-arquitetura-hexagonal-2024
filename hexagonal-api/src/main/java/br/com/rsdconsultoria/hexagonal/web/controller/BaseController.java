@@ -16,8 +16,6 @@ public class BaseController {
     public String getMessage(String message, String countryCode) {
         // TODO: corrigir a forma como o Locale é criado para que crie com código do
         // país e idioma
-        return messageSource.getMessage(message, null,
-                new Locale((countryCode != null ? countryCode : "").toUpperCase(),
-                        (countryCode != null ? countryCode : "").toLowerCase()));
+        return messageSource.getMessage(message, null, new Locale(countryCode.toUpperCase(), countryCode.toLowerCase()));
     }
 }

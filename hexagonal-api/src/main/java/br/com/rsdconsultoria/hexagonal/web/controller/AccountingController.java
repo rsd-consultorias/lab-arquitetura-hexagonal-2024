@@ -19,11 +19,11 @@ import br.com.rsdconsultoria.hexagonal.application.service.AccountingService;
 import br.com.rsdconsultoria.hexagonal.application.service.InventoryService;
 import br.com.rsdconsultoria.hexagonal.application.service.OrderService;
 import br.com.rsdconsultoria.hexagonal.application.service.PaymentService;
+import br.com.rsdconsultoria.hexagonal.application.service.SagaOrchestrationService;
 import br.com.rsdconsultoria.hexagonal.command.CreateInvoiceCommand;
 import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
-import br.com.rsdconsultoria.hexagonal.integration.SagaOrchestrator;
 import br.com.rsdconsultoria.hexagonal.util.factory.InvoiceFactory;
 import br.com.rsdconsultoria.hexagonal.web.dto.InvoiceResponse;
 
@@ -33,7 +33,7 @@ public class AccountingController extends BaseController {
     private AccountingService accountingApplicationService;
     private InvoiceRepositoryImpl invoiceRepository;
     private final CreateInvoiceCommandHandler createInvoiceCommandHandler;
-    private SagaOrchestrator sagaOrchestrator;
+    private SagaOrchestrationService sagaOrchestrator;
 
     public AccountingController(final InvoiceRepositoryImpl invoiceRepository) {
         this.accountingApplicationService = new AccountingService(invoiceRepository);
@@ -41,7 +41,7 @@ public class AccountingController extends BaseController {
         this.createInvoiceCommandHandler = new CreateInvoiceCommandHandler();
 
         // TODO: refatorar essa parte ;)
-        this.sagaOrchestrator = new SagaOrchestrator(
+        this.sagaOrchestrator = new SagaOrchestrationService(
                 new OrderService(),
                 new PaymentService(),
                 new InventoryService());

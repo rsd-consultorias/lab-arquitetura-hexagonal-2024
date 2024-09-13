@@ -14,11 +14,11 @@ public class OAuthConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/docs/**").permitAll()
-                .requestMatchers("/accounting/**").permitAll()
-                .requestMatchers("/actuator/**").permitAll()
-                .anyRequest().authenticated());
+        // http.authorizeHttpRequests(authorize -> authorize
+        //         .requestMatchers("/docs/**").permitAll()
+        //         .requestMatchers("/accounting/**").permitAll()
+        //         .requestMatchers("/actuator/**").permitAll()
+        //         .anyRequest().authenticated());
     
         return http.build();
     }

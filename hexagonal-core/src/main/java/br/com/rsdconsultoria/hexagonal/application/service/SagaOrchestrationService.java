@@ -1,21 +1,15 @@
-package br.com.rsdconsultoria.hexagonal.integration;
+package br.com.rsdconsultoria.hexagonal.application.service;
 
-import br.com.rsdconsultoria.hexagonal.application.service.InventoryService;
-import br.com.rsdconsultoria.hexagonal.application.service.OrderService;
-import br.com.rsdconsultoria.hexagonal.application.service.PaymentService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 
-public class SagaOrchestrator {
-
+public class SagaOrchestrationService {
     private OrderService orderService;
-
     private PaymentService paymentService;
-
     private InventoryService inventoryService;
 
-    public SagaOrchestrator(OrderService orderService,
-            PaymentService paymentService,
-            InventoryService inventoryService) {
+    public SagaOrchestrationService(final OrderService orderService,
+            final PaymentService paymentService,
+            final InventoryService inventoryService) {
         this.orderService = orderService;
         this.paymentService = paymentService;
         this.inventoryService = inventoryService;

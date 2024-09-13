@@ -3,6 +3,10 @@ package br.com.rsdconsultoria.hexagonal.application.service;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 
 public class PaymentService {
+    public PaymentService() {
+
+    }
+
     public void processPayment(Order order) {
         // Lógica para processar pagamento
     }
