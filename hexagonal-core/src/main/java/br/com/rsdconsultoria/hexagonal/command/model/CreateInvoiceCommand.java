@@ -1,12 +1,12 @@
-package br.com.rsdconsultoria.hexagonal.command;
+package br.com.rsdconsultoria.hexagonal.command.model;
 
 import java.math.BigDecimal;
 
 // Command: Representa uma operação de escrita
-public class CreateInvoiceCommand {
-    private String invoiceId;
-    private String customerId;
-    private BigDecimal amount;
+public class CreateInvoiceCommand implements Command {
+    private final String invoiceId;
+    private final String customerId;
+    private final BigDecimal amount;
 
     public CreateInvoiceCommand(String invoiceId, String customerId, BigDecimal amount) {
         this.invoiceId = invoiceId;

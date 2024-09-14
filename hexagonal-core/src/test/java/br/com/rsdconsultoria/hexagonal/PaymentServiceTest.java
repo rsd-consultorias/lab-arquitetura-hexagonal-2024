@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.rsdconsultoria.hexagonal.application.service.PaymentService;
+import br.com.rsdconsultoria.hexagonal.command.service.PaymentService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 import br.com.rsdconsultoria.hexagonal.domain.repository.OrderRepository;
 

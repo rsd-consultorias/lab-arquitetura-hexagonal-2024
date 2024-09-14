@@ -3,7 +3,7 @@ package br.com.rsdconsultoria.hexagonal;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import br.com.rsdconsultoria.hexagonal.application.service.OrderService;
+import br.com.rsdconsultoria.hexagonal.command.service.OrderService;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 
 public class OrderServiceTest {

@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rsdconsultoria.hexagonal.application.service.AccountingService;
-import br.com.rsdconsultoria.hexagonal.application.service.InventoryService;
-import br.com.rsdconsultoria.hexagonal.application.service.OrderService;
-import br.com.rsdconsultoria.hexagonal.application.service.PaymentService;
-import br.com.rsdconsultoria.hexagonal.application.service.SagaOrchestrationService;
-import br.com.rsdconsultoria.hexagonal.command.CreateInvoiceCommand;
+import br.com.rsdconsultoria.hexagonal.application.service.PurchaseOrchestrationService;
 import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
+import br.com.rsdconsultoria.hexagonal.command.handler.OrderCommandHandler;
+import br.com.rsdconsultoria.hexagonal.command.model.CreateInvoiceCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.CreateOrderCommand;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.OrderRepositoryImpl;
 import br.com.rsdconsultoria.hexagonal.util.factory.InvoiceFactory;
+import br.com.rsdconsultoria.hexagonal.web.dto.ApiErrorResponse;
 import br.com.rsdconsultoria.hexagonal.web.dto.InvoiceResponse;
 
 @RestController
@@ -34,7 +34,7 @@ public class AccountingController extends BaseController {
     private final AccountingService accountingApplicationService;
     private final InvoiceRepositoryImpl invoiceRepository;
     private final CreateInvoiceCommandHandler createInvoiceCommandHandler;
-    private final SagaOrchestrationService sagaOrchestrator;
+    private final PurchaseOrchestrationService sagaOrchestrator;
     private final OrderRepositoryImpl orderRepository;
 
     public AccountingController(final InvoiceRepositoryImpl invoiceRepository,
@@ -45,20 +45,28 @@ public class AccountingController extends BaseController {
         this.createInvoiceCommandHandler = new CreateInvoiceCommandHandler();
 
         // TODO: refatorar essa parte ;)
-        this.sagaOrchestrator = new SagaOrchestrationService(
-                new OrderService(),
-                new PaymentService(orderRepository),
-                new InventoryService());
+        var orderCommandHandler = new OrderCommandHandler(orderRepository);
+        this.sagaOrchestrator = new PurchaseOrchestrationService(
+                orderCommandHandler, orderCommandHandler, orderCommandHandler);
     }
 
     @PostMapping("/createInvoice")
-    public ResponseEntity<Void> createInvoice(@RequestBody CreateInvoiceCommand command) {
-        var order = new Order();
+    public ResponseEntity<Object> createInvoice(
+            @RequestBody CreateInvoiceCommand command,
+            @RequestHeader(value = "language", required = false, defaultValue = "") String language) {
+        Order order = new Order();
         order.setId("1");
-        order.setProduct("Test");
-        order.setQuantity(1);
+        order.setProduct("Product A");
+        order.setQuantity(10);
+        var createOrderCommand = new CreateOrderCommand("1", order);
 
-        this.sagaOrchestrator.executeSaga(order);
+        try {
+            sagaOrchestrator.execute(createOrderCommand, createOrderCommand, createOrderCommand);
+        } catch (Exception e) {
+            var errorBody = new ApiErrorResponse(e.getMessage(), getMessage(e.getMessage(), language));
+
+            return ResponseEntity.badRequest().body(errorBody);
+        }
 
         createInvoiceCommandHandler.handle(command);
         return ResponseEntity.ok().build();

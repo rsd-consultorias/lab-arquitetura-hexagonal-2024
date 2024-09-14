@@ -1,4 +1,4 @@
-package br.com.rsdconsultoria.hexagonal.application.service;
+package br.com.rsdconsultoria.hexagonal.command.service;
 
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 import br.com.rsdconsultoria.hexagonal.domain.repository.OrderRepository;

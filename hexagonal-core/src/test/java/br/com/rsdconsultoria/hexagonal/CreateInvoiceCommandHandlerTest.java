@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.rsdconsultoria.hexagonal.command.CreateInvoiceCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.CreateInvoiceCommand;
 import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.service.InvoiceService;
 
