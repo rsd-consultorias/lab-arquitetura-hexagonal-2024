@@ -1,7 +1,5 @@
 package br.com.rsdconsultoria.hexagonal;
 
-import static org.mockito.Mockito.*;
-
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,8 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import br.com.rsdconsultoria.hexagonal.command.handler.InvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateInvoiceCommand;
-import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.service.InvoiceService;
 
 public class CreateInvoiceCommandHandlerTest {
@@ -20,7 +18,7 @@ public class CreateInvoiceCommandHandlerTest {
     private InvoiceService invoiceService;
 
     @InjectMocks
-    private CreateInvoiceCommandHandler createInvoiceCommandHandler;
+    private InvoiceCommandHandler createInvoiceCommandHandler;
 
     @BeforeEach
     public void setUp() {

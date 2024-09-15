@@ -4,10 +4,10 @@ import br.com.rsdconsultoria.hexagonal.command.model.CreateInvoiceCommand;
 import br.com.rsdconsultoria.hexagonal.command.service.InvoiceService;
 
 // Handler: Lida com a execução do comando
-public class CreateInvoiceCommandHandler {
+public class InvoiceCommandHandler {
     private final InvoiceService invoiceService;
 
-    public CreateInvoiceCommandHandler() {
+    public InvoiceCommandHandler() {
         this.invoiceService = new InvoiceService();
     }
 

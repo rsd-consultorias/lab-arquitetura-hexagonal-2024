@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rsdconsultoria.hexagonal.application.service.AccountingService;
 import br.com.rsdconsultoria.hexagonal.application.service.PurchaseOrchestrationService;
-import br.com.rsdconsultoria.hexagonal.command.handler.CreateInvoiceCommandHandler;
+import br.com.rsdconsultoria.hexagonal.command.handler.InventoryCommandHandler;
+import br.com.rsdconsultoria.hexagonal.command.handler.InvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.handler.OrderCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateInvoiceCommand;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateOrderCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.CreatePaymentCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.UpdateInventoryCommand;
 import br.com.rsdconsultoria.hexagonal.domain.model.Order;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.InvoiceRepositoryImpl;
 import br.com.rsdconsultoria.hexagonal.infrastructure.repository.OrderRepositoryImpl;
@@ -31,23 +34,22 @@ import br.com.rsdconsultoria.hexagonal.web.dto.InvoiceResponse;
 @RestController
 @RequestMapping("/accounting")
 public class AccountingController extends BaseController {
+
     private final AccountingService accountingApplicationService;
     private final InvoiceRepositoryImpl invoiceRepository;
-    private final CreateInvoiceCommandHandler createInvoiceCommandHandler;
+    private final InvoiceCommandHandler createInvoiceCommandHandler;
     private final PurchaseOrchestrationService sagaOrchestrator;
-    private final OrderRepositoryImpl orderRepository;
 
     public AccountingController(final InvoiceRepositoryImpl invoiceRepository,
-            final OrderRepositoryImpl orderRepository) {
+            final OrderRepositoryImpl orderRepositor,
+            final OrderCommandHandler orderCommandHandler,
+            final InventoryCommandHandler inventoryCommandHandler) {
         this.accountingApplicationService = new AccountingService(invoiceRepository);
         this.invoiceRepository = invoiceRepository;
-        this.orderRepository = orderRepository;
-        this.createInvoiceCommandHandler = new CreateInvoiceCommandHandler();
+        this.createInvoiceCommandHandler = new InvoiceCommandHandler();
 
-        // TODO: refatorar essa parte ;)
-        var orderCommandHandler = new OrderCommandHandler(orderRepository);
         this.sagaOrchestrator = new PurchaseOrchestrationService(
-                orderCommandHandler, orderCommandHandler, orderCommandHandler);
+                orderCommandHandler, orderCommandHandler, inventoryCommandHandler);
     }
 
     @PostMapping("/createInvoice")
@@ -59,9 +61,11 @@ public class AccountingController extends BaseController {
         order.setProduct("Product A");
         order.setQuantity(10);
         var createOrderCommand = new CreateOrderCommand("1", order);
+        var createPaymentCommand = new CreatePaymentCommand();
+        var updateInventoryCommand = new UpdateInventoryCommand();
 
         try {
-            sagaOrchestrator.execute(createOrderCommand, createOrderCommand, createOrderCommand);
+            sagaOrchestrator.execute(createOrderCommand, createPaymentCommand, updateInventoryCommand);
         } catch (Exception e) {
             var errorBody = new ApiErrorResponse(e.getMessage(), getMessage(e.getMessage(), language));
 

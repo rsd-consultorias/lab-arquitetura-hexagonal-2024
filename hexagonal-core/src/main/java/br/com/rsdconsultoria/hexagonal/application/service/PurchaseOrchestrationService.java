@@ -1,19 +1,28 @@
 package br.com.rsdconsultoria.hexagonal.application.service;
 
+import br.com.rsdconsultoria.hexagonal.command.handler.InventoryCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.handler.OrderCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateOrderCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.CreatePaymentCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.UpdateInventoryCommand;
 import br.com.rsdconsultoria.hexagonal.domain.constants.ExceptionMessages;
 
+/**
+ * Exemplo 11: Implementação de SAGA Pattern
+ *
+ * Resumo: Gerencia consistência de dados em microsserviços com transações
+ * locais sequenciais e compensatórias para falhas.
+ */
 public class PurchaseOrchestrationService {
 
     private final OrderCommandHandler orderCommandHandler;
     private final OrderCommandHandler paymentCommandHandler;
-    private final OrderCommandHandler inventoryCommandHandler;
+    private final InventoryCommandHandler inventoryCommandHandler;
 
     public PurchaseOrchestrationService(
             final OrderCommandHandler orderCommandHandler,
             final OrderCommandHandler paymentCommandHandler,
-            final OrderCommandHandler inventoryCommandHandler) {
+            final InventoryCommandHandler inventoryCommandHandler) {
         this.orderCommandHandler = orderCommandHandler;
         this.paymentCommandHandler = paymentCommandHandler;
         this.inventoryCommandHandler = inventoryCommandHandler;
@@ -21,8 +30,8 @@ public class PurchaseOrchestrationService {
 
     public void execute(
             CreateOrderCommand createOrderCommand,
-            CreateOrderCommand createPaymentCommand,
-            CreateOrderCommand updateInventoryCommand) throws Exception {
+            CreatePaymentCommand createPaymentCommand,
+            UpdateInventoryCommand updateInventoryCommand) throws Exception {
         try {
             // Cria pedido
             orderCommandHandler.handle(createOrderCommand);

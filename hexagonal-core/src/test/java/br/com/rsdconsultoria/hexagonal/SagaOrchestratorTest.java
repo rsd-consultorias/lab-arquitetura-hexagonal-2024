@@ -5,13 +5,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 
 import br.com.rsdconsultoria.hexagonal.application.service.PurchaseOrchestrationService;
+import br.com.rsdconsultoria.hexagonal.command.handler.InventoryCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.handler.OrderCommandHandler;
+import br.com.rsdconsultoria.hexagonal.command.handler.PaymentCommandhandler;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateOrderCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.CreatePaymentCommand;
+import br.com.rsdconsultoria.hexagonal.command.model.UpdateInventoryCommand;
 import br.com.rsdconsultoria.hexagonal.command.service.InventoryService;
 import br.com.rsdconsultoria.hexagonal.command.service.OrderService;
 import br.com.rsdconsultoria.hexagonal.command.service.PaymentService;
@@ -33,15 +36,21 @@ public class SagaOrchestratorTest {
 
     @Mock
     private OrderCommandHandler orderCommandHandler;
-
-    @InjectMocks
-    private PurchaseOrchestrationService sagaOrchestrator;
+    
+    @Mock
+    private InventoryCommandHandler inventoryCommandHandler;
+    
+    @Mock
+    private PaymentCommandhandler paymentCommandhandler;
 
     @Mock
     private InvoiceRepository invoiceRepository;
 
     @Mock
     private OrderRepository orderRepository;
+
+    @InjectMocks
+    private PurchaseOrchestrationService sagaOrchestrator;
 
     @BeforeEach
     public void setUp() {
@@ -51,14 +60,15 @@ public class SagaOrchestratorTest {
     @Test
     public void testExecuteSagaSuccess() {
         Order order = new Order();
-        Order order1 = new Order();
         order.setId("1");
         order.setProduct("Product A");
         order.setQuantity(10);
         var createOrderCommand = new CreateOrderCommand("1", order);
+        var createPaymentCommand = new CreatePaymentCommand();
+        var updateInventoryCommand = new UpdateInventoryCommand();
 
         try {
-            sagaOrchestrator.execute(createOrderCommand, createOrderCommand, createOrderCommand);
+            sagaOrchestrator.execute(createOrderCommand, createPaymentCommand, updateInventoryCommand);
         } catch (Exception e) {
             assertEquals(e, null);
         }
@@ -70,13 +80,14 @@ public class SagaOrchestratorTest {
         order.setId("1");
         order.setProduct("Product A");
         order.setQuantity(10);
-        var createOrderCommand = new CreateOrderCommand("1", order);
+        var createOrderCommand = new CreateOrderCommand("", order);
 
-        doThrow(new RuntimeException()).when(orderRepository).save(order);
         when(orderRepository.findOrderByLocator("1")).thenReturn(order);
+        var createPaymentCommand = new CreatePaymentCommand();
+        var updateInventoryCommand = new UpdateInventoryCommand();
 
         try {
-            sagaOrchestrator.execute(createOrderCommand, createOrderCommand, createOrderCommand);
+            sagaOrchestrator.execute(createOrderCommand, createPaymentCommand, updateInventoryCommand);
         } catch (Exception e) {
             assertEquals(e.getMessage(), ExceptionMessages.ROLLBACK_TRANSACTION);
         }
