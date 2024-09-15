@@ -1,4 +1,4 @@
-package br.com.rsdconsultoria.estoque_api;
+package br.com.rsdconsultoria.estoque;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

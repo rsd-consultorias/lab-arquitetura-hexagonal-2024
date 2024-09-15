@@ -1,13 +1,13 @@
-package br.com.rsdconsultoria.estoque_api;
+package br.com.rsdconsultoria.exemplo.pedido;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EstoqueApiApplication {
+public class PedidoApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EstoqueApiApplication.class, args);
+		SpringApplication.run(PedidoApiApplication.class, args);
 	}
 
 }

@@ -8,10 +8,10 @@
 		<version>3.3.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.rsdconsultoria.exemplo</groupId>
-	<artifactId>pedido-api</artifactId>
+	<groupId>br.com.rsdconsultoria</groupId>
+	<artifactId>pagamentos-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pedido-api</name>
+	<name>pagamentos-api</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
