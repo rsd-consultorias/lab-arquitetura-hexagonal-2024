@@ -20,7 +20,7 @@ public class OrderCommandHandler implements CommandHandler {
         if (command instanceof CreateOrderCommand) {
             var createOrderCommand = (CreateOrderCommand) command;
             if (createOrderCommand.getCorrelationId().isEmpty()) {
-                throw new Exception(ExceptionMessages.INVALID_COMMAND);
+                throw new Exception(ExceptionMessages.CORRELATION_ID_CANT_BE_EMPTY);
             }
 
             this.orderRepository.save(createOrderCommand.getNewOrder());

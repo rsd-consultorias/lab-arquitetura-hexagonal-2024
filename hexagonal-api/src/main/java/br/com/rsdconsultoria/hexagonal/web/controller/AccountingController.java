@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.rsdconsultoria.hexagonal.application.service.AccountingService;
 import br.com.rsdconsultoria.hexagonal.application.service.PurchaseOrchestrationService;
 import br.com.rsdconsultoria.hexagonal.command.handler.InventoryCommandHandler;
-import br.com.rsdconsultoria.hexagonal.command.handler.InvoiceCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.handler.OrderCommandHandler;
+import br.com.rsdconsultoria.hexagonal.command.handler.PaymentCommandhandler;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateInvoiceCommand;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateOrderCommand;
 import br.com.rsdconsultoria.hexagonal.command.model.CreatePaymentCommand;
@@ -37,19 +37,18 @@ public class AccountingController extends BaseController {
 
     private final AccountingService accountingApplicationService;
     private final InvoiceRepositoryImpl invoiceRepository;
-    private final InvoiceCommandHandler createInvoiceCommandHandler;
     private final PurchaseOrchestrationService sagaOrchestrator;
 
     public AccountingController(final InvoiceRepositoryImpl invoiceRepository,
             final OrderRepositoryImpl orderRepositor,
             final OrderCommandHandler orderCommandHandler,
-            final InventoryCommandHandler inventoryCommandHandler) {
+            final InventoryCommandHandler inventoryCommandHandler,
+            final PaymentCommandhandler paymentCommandhandler) {
         this.accountingApplicationService = new AccountingService(invoiceRepository);
         this.invoiceRepository = invoiceRepository;
-        this.createInvoiceCommandHandler = new InvoiceCommandHandler();
 
         this.sagaOrchestrator = new PurchaseOrchestrationService(
-                orderCommandHandler, orderCommandHandler, inventoryCommandHandler);
+                orderCommandHandler, paymentCommandhandler, inventoryCommandHandler);
     }
 
     @PostMapping("/createInvoice")
@@ -72,7 +71,6 @@ public class AccountingController extends BaseController {
             return ResponseEntity.badRequest().body(errorBody);
         }
 
-        createInvoiceCommandHandler.handle(command);
         return ResponseEntity.ok().build();
     }
 

@@ -89,7 +89,7 @@ public class SagaOrchestratorTest {
         try {
             sagaOrchestrator.execute(createOrderCommand, createPaymentCommand, updateInventoryCommand);
         } catch (Exception e) {
-            assertEquals(e.getMessage(), ExceptionMessages.ROLLBACK_TRANSACTION);
+            assertEquals(e.getMessage(), ExceptionMessages.CORRELATION_ID_CANT_BE_EMPTY);
         }
     }
 }

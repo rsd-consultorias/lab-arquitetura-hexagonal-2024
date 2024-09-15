@@ -2,6 +2,7 @@ package br.com.rsdconsultoria.hexagonal.application.service;
 
 import br.com.rsdconsultoria.hexagonal.command.handler.InventoryCommandHandler;
 import br.com.rsdconsultoria.hexagonal.command.handler.OrderCommandHandler;
+import br.com.rsdconsultoria.hexagonal.command.handler.PaymentCommandhandler;
 import br.com.rsdconsultoria.hexagonal.command.model.CreateOrderCommand;
 import br.com.rsdconsultoria.hexagonal.command.model.CreatePaymentCommand;
 import br.com.rsdconsultoria.hexagonal.command.model.UpdateInventoryCommand;
@@ -16,12 +17,12 @@ import br.com.rsdconsultoria.hexagonal.domain.constants.ExceptionMessages;
 public class PurchaseOrchestrationService {
 
     private final OrderCommandHandler orderCommandHandler;
-    private final OrderCommandHandler paymentCommandHandler;
+    private final PaymentCommandhandler paymentCommandHandler;
     private final InventoryCommandHandler inventoryCommandHandler;
 
     public PurchaseOrchestrationService(
             final OrderCommandHandler orderCommandHandler,
-            final OrderCommandHandler paymentCommandHandler,
+            final PaymentCommandhandler paymentCommandHandler,
             final InventoryCommandHandler inventoryCommandHandler) {
         this.orderCommandHandler = orderCommandHandler;
         this.paymentCommandHandler = paymentCommandHandler;
