@@ -17,3 +17,5 @@ bin/kafka-server-start.sh config/kraft/server.properties
 # Delete data from environment
 rm -rf /tmp/kafka-logs /tmp/zookeeper /tmp/kraft-combined-logs
 ```
+
+[Get started...](https://kafka.apache.org/quickstart)
