@@ -9,5 +9,7 @@
     <modules>
         <module>hexagonal-core</module>
         <module>hexagonal-api</module>
+        <module>pedido-api</module>
+        <module>estoque-api</module>
     </modules>
 </project>

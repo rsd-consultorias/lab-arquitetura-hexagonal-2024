@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestHexagonalApplication",
+            "request": "launch",
+            "mainClass": "br.com.rsdconsultoria.hexagonal.tests.TestHexagonalApplication",
+            "projectName": "hexagonal-api"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
