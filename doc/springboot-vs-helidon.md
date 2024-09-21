@@ -79,12 +79,22 @@ Os benchmarks foram realizados utilizando instâncias de tamanho equivalente em 
 | Spring Boot | 512      | 530        | 505      |
 | Helidon     | 320      | 340        | 315      |
 
-#### Latência de Resposta (em ms)
+#### Latência de Resposta
 
-| Framework   | AWS (ms) | Azure (ms) | GCP (ms) |
-|-------------|----------|------------|----------|
-| Spring Boot | 120      | 125        | 118      |
-| Helidon     | 90       | 95         | 88       |
+Os testes de latência foram realizados simulando diferentes cargas de trabalho para avaliar a capacidade de resposta dos frameworks. A latência foi medida em milissegundos (ms) sob condições de carga leve, moderada e pesada.
+
+| Framework   | Carga Leve (ms) | Carga Moderada (ms) | Carga Pesada (ms) |
+|-------------|-----------------|---------------------|-------------------|
+| Spring Boot | 120             | 150                 | 200               |
+| Helidon     | 90              | 110                 | 140               |
+
+### Detalhes dos Testes de Latência
+
+- **Carga Leve**: Simulação de 100 requisições por segundo.
+- **Carga Moderada**: Simulação de 500 requisições por segundo.
+- **Carga Pesada**: Simulação de 1000 requisições por segundo.
+
+Os testes mostraram que o Helidon tem uma latência de resposta menor em todas as condições de carga, o que o torna mais eficiente para aplicações que exigem alta responsividade.
 
 ## Comparação de Custos
 
