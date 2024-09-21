@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>br.com.rsdconsultoria.exemplo</groupId>
 	<artifactId>pedido-api</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<name>pedido-api</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
