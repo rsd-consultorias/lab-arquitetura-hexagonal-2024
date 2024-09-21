@@ -104,11 +104,9 @@ Os benchmarks foram realizados utilizando instâncias de tamanho equivalente em 
 
 ## Conclusão
 
-Os benchmarks mostram que o Helidon tende a ter um desempenho melhor em termos de tempo de inicialização, uso de CPU e memória, e latência de resposta. Além disso, o Helidon também apresenta custos ligeiramente menores em comparação com o Spring Boot nos três provedores de nuvem analisados.
-
-## Conclusão
-
 A escolha entre Spring Boot e Helidon depende das necessidades específicas do seu projeto. Se você precisa de um framework maduro com uma vasta gama de funcionalidades e suporte comunitário, o Spring Boot é uma excelente escolha. Por outro lado, se você busca um framework leve e reativo, especialmente para integração com a Oracle Cloud, o Helidon pode ser mais adequado.
+
+Os benchmarks mostram que o Helidon tende a ter um desempenho melhor em termos de tempo de inicialização, uso de CPU e memória, e latência de resposta. Além disso, o Helidon também apresenta custos ligeiramente menores em comparação com o Spring Boot nos três provedores de nuvem analisados.
 
 ## Fontes
 
